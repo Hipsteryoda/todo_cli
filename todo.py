@@ -23,8 +23,9 @@ def add(task):
 def list():
     with open(TODO_FILE_PATH, 'r') as file:
         lines = file.readlines()
-        for line in lines:
-            print(line)
+        for idx, val in enumerate(lines):
+            lines[idx] = lines[idx].replace("\n", "")
+            print(lines[idx])     
         file.close()
 
 def remove(idx):
@@ -39,8 +40,6 @@ def complete(idx):
         print(lines)
         lines[idx].replace('[ ]', '[x]')
         print(lines[idx])
-        # print(lines)
-        # writeToFile(lines, file)
 
 try:
     parser = argparse.ArgumentParser(description = "Manages tasks in todo.md")
