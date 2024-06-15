@@ -1,13 +1,7 @@
 #!/usr/bin/python3
 
 import argparse
-from itertools import islice
-from config import TODO_FILE_PATH
 import actionManager 
-
-# TODO:
-# Allow for flexible tagging (e.g. -f <tag> <value>; -f due 2024-06-10)
-# Add a list option
 
 try:
     parser = argparse.ArgumentParser(description = "Manages tasks in todo.md")
