@@ -29,6 +29,15 @@ def remove(idx):
         file.close()
         list()
 
+def tag(idx, key, value):
+    # TODO: check if tag of same type exists already and replace
+    with open(TODO_FILE_PATH, 'r+') as file:
+        lines = file.readlines()
+        lines[idx] = lines[idx].strip() + f" [{key}:: {value}]\n"
+        writeToFile(lines, file)
+        file.close()
+        list()
+
 def complete(idx):
     with open(TODO_FILE_PATH, 'r+') as file:
         lines = file.readlines()
