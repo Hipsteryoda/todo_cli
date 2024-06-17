@@ -11,13 +11,14 @@ def add(task):
     with open(TODO_FILE_PATH, 'a') as file:
         file.write("\n- [ ] " + task)
         file.close()
+        list()
 
 def list():
     with open(TODO_FILE_PATH, 'r') as file:
         lines = file.readlines()
-        for idx, val in enumerate(lines):
+        for idx in range(len(lines)):
             lines[idx] = lines[idx].replace("\n", "")
-            print(lines[idx])     
+            print(f" {idx}   {lines[idx]}")
         file.close()
 
 def remove(idx):
@@ -25,6 +26,8 @@ def remove(idx):
         lines = file.readlines()
         del lines[idx]
         writeToFile(lines, file)
+        file.close()
+        list()
 
 def complete(idx):
     with open(TODO_FILE_PATH, 'r+') as file:
@@ -32,4 +35,5 @@ def complete(idx):
         lines[idx] = lines[idx].replace('[ ]', '[x]')
         writeToFile(lines, file)
         file.close()
+        list()
 
