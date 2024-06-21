@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import argparse
-import actionManager 
+from actionManager import actionManager
 
 try:
     parser = argparse.ArgumentParser(description = "Manages tasks in todo.md")
