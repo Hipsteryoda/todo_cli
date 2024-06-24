@@ -18,6 +18,7 @@ def add(task, due_date=None, priority=None):
                     , '{priority}');""")
     commit(db)
     close(db)
+    syncToFile()
     list()
 
 def list():
@@ -29,7 +30,6 @@ def list():
                         WHERE completed = 0;""")
     rows = res.fetchall()
     close(db)
-    syncToFile()
     for row in rows:
         print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}")
 
@@ -42,16 +42,17 @@ def complete(idx):
                 WHERE id = {idx};""")
     commit(db)
     close(db)
+    syncToFile()
     list()
 
 def syncToFile():
     db = connect()
     cursor = db.cursor()
-    res = cursor.execute("""SELECT task 
+    res = cursor.execute("""SELECT task, due_date, priority 
                         FROM tasks
                         WHERE completed = 0;""")
     rows = res.fetchall()
     close(db)
     with open(TODO_FILE_PATH, 'w') as f:
         for row in rows:
-            f.write(f"- [ ] {row[0]}\n")
+            f.write(f"- [ ] {row[0]} [due:: {row[1]}] [priority:: {row[2]}]\n")
