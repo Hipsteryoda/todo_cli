@@ -1,7 +1,8 @@
 import sqlite3
+from actionManager.config import DB_FILE_PATH
 
 def connect():
-    return sqlite3.connect('actionManager/todo.db')
+    return sqlite3.connect(DB_FILE_PATH)
 
 def close(db):
     db.close()
