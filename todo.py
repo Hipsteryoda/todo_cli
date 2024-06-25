@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import argparse
-import actionManager 
+from actionManager import actionManager
 
 try:
     parser = argparse.ArgumentParser(description = "Manages tasks in todo.md")
@@ -13,7 +13,9 @@ try:
     args = parser.parse_args()
 
     if args.add:
-        actionManager.add(args.add)
+        due_date = input('Due date (YYYY-MM-DD): ')
+        priority = input('Priority: ')
+        actionManager.add(args.add, due_date=due_date, priority=priority)
     elif args.list:
         actionManager.list()
     elif args.remove:
