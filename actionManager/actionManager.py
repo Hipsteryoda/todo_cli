@@ -1,9 +1,9 @@
-from actionManager.config import TODO_FILE_PATH
-from actionManager.db import connect, execute, commit, close
+from actionManager.config import TODO_FILE_PATH 
+from actionManager.db import connect, execute, commit, close, init
 from datetime import datetime
 
 def add(task, due_date=None, priority=None):
-    # use sqlite3 to insert into db
+    # use sqlite3 to insert into db
     now = datetime.strftime(datetime.now(), "%Y-%m-%dT%H:%M:%S.%f") 
     db = connect()
     execute(db, f"""INSERT INTO tasks (task
@@ -75,3 +75,4 @@ def syncToFile():
     with open(TODO_FILE_PATH, 'w') as f:
         for row in rows:
             f.write(f"- [ ] {row[0]} | {row[1]} [due:: {row[2]}] [priority:: {row[3]}]\n")
+
