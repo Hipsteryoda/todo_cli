@@ -23,17 +23,19 @@ def add(task, due_date=None, priority=None):
 
 def list():
     #TODO: format headers and row values to be properly aligned
-    print("ID\tDUE DATE\tPRIORITY\tTASK")
+    headers = ["ID", "PRIORITY", "DUE DATE", "TASK"]
+    # spacing = [10, 10, 15, 30]
+    print(" | {: <6} | {: <15} | {: <15} | {: <30}".format(*headers))
     db = connect()
     cursor = db.cursor()
-    res = cursor.execute("""SELECT id, due_date, priority, task 
+    res = cursor.execute("""SELECT id, priority, due_date, task 
                         FROM tasks
                         WHERE completed = 0
                         ORDER BY priority ASC;""")
     rows = res.fetchall()
     close(db)
     for row in rows:
-        print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}")
+        print(f" | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}")
 
 def complete(idx):
     # find the task in the database and set completed to 1
