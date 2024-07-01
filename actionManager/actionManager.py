@@ -31,7 +31,7 @@ def list():
     res = cursor.execute("""SELECT id, priority, due_date, task 
                         FROM tasks
                         WHERE completed = 0
-                        ORDER BY priority ASC;""")
+                        ORDER BY priority, due_date ASC;""")
     rows = res.fetchall()
     close(db)
     for row in rows:
