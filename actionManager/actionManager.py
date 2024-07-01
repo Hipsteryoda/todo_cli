@@ -1,6 +1,7 @@
 from actionManager.config import TODO_FILE_PATH 
 from actionManager.db import connect, execute, commit, close, init
 from datetime import datetime
+from actionManager.bcolors import bcolors
 
 def add(task, due_date=None, priority=None):
     # use sqlite3 to insert into db
@@ -25,7 +26,7 @@ def list():
     #TODO: format headers and row values to be properly aligned
     headers = ["ID", "PRIORITY", "DUE DATE", "TASK"]
     # spacing = [10, 10, 15, 30]
-    print(" | {: <6} | {: <15} | {: <15} | {: <30}".format(*headers))
+    print(f"{bcolors.UNDERLINE}" + " | {: <6} | {: <15} | {: <15} | {: <30}".format(*headers) + bcolors.ENDC)
     db = connect()
     cursor = db.cursor()
     res = cursor.execute("""SELECT id, priority, due_date, task 
@@ -35,7 +36,13 @@ def list():
     rows = res.fetchall()
     close(db)
     for row in rows:
-        print(f" | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}")
+        # print(f" | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}")
+        # Started working on this 2024-07-01
+        # For any due dates < today, print in red
+        if row[2] < datetime.strftime(datetime.now(), "%Y-%m-%d"):
+            print(f"{bcolors.WARNING} | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}{bcolors.ENDC}")
+        else:
+            print(f" | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}")
 
 def complete(idx):
     # find the task in the database and set completed to 1
