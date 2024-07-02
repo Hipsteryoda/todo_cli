@@ -1,16 +1,15 @@
-import yaml, os
-from actionManager.db import connect, execute, commit, close, init
+import os
+from actionManager.db import connect, execute, commit, close
+from actionManager.config import source_config
 from datetime import datetime
 from actionManager.bcolors import bcolors
 
-CONFIG_PATH = os.environ["HOME"] + "/.config/todo_cli/config.yaml"
-with open(CONFIG_PATH) as config_file:
-    try:
-        config = yaml.safe_load(config_file)
-        TODO_FILE_PATH = os.environ["HOME"] + config['config']['todo_file_path']
-    except yaml.YAMLError as exc:
-        print(exc)
-
+# TODO: create a dedicated function to read the config file
+try:
+    conf = source_config()
+    TODO_FILE_PATH = os.environ["HOME"] + conf['config']['todo_file_path']
+except Exception as e:
+    print(e)
 
 def add(task, due_date=None, priority=None):
     # use sqlite3 to insert into db

@@ -1,4 +1,3 @@
 __pycache__/
-config.py
 actionManager/todo.db
 actionManager/todo.sql
