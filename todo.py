@@ -13,8 +13,7 @@ try:
     args = parser.parse_args()
 
     if args.add:
-        due_date = input('Due date (YYYY-MM-DD): ')
-        priority = input('Priority: ')
+        due_date, priority = actionManager.collect_task_details()
         actionManager.add(args.add, due_date=due_date, priority=priority)
     elif args.list:
         actionManager.list()

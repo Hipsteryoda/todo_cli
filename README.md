@@ -9,6 +9,7 @@ cli interface for managing tasks in central Obsidian file
 - [ ] Integrate a pomodoro timer
 - [ ] Add a way to modify tasks (due_date, priority, etc)
 - [ ] Add a way to add tags to tasks
+- [ ] Clean up the quereies in actionManager; find a more organized way of doing this
 
 # Configuration
 Add a file `config.yaml` in `.config/todo-cli` with the following contents:

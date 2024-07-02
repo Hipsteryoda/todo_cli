@@ -30,6 +30,15 @@ def add(task, due_date=None, priority=None):
     syncToFile()
     list()
 
+def collect_task_details():
+    due_date = input('Due date (YYYY-MM-DD): ')
+    if due_date == '':
+        due_date = datetime.today().strftime("%Y-%m-%d")
+    priority = input('Priority: ')
+    if priority == '':
+        priority = '1'
+    return due_date, priority
+
 def list():
     #TODO: format headers and row values to be properly aligned
     headers = ["ID", "PRIORITY", "DUE DATE", "TASK"]
