@@ -1,10 +1,18 @@
 # todo_cli
 cli interface for managing tasks in central Obsidian file
 
-## Future Ideas
-1. Implement a database for storing tasks and task attributes.
-    1. From database, fetch tasks and write to working Obsidian file.
-2. Implement a cleanup that removes completed tasks from the todo file after a certain amount of time.
+# TODO
+- [x] Move config to a yaml file in .config/todo-cli
+- [ ] If db doesn't exist, create the database in the proper schema
+- [ ] Integrate a pomodoro timer
+- [ ] Add a way to modify tasks (due_date, priority, etc)
+- [ ] Add a way to add tags to tasks
 
 # Configuration
-1. Add a `config.py` file with the constant `TODO_FILE_PATH` pointing to your desired todo file.
+Add a file `config.yaml` in `.config/todo-cli` with the following contents:
+```
+config:
+    # specify relative path to todo file from $HOME; do not include ~ in path
+    todo_file_path: PATH_TO_MARKDOWN_FILE
+    db_file_path: PATH_TO_SQLITE_FILE
+```
