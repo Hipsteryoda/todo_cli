@@ -5,7 +5,7 @@ cli interface for managing tasks in central Obsidian file
 - [x] Move config to a yaml file in .config/todo-cli
 - [x] If db doesn't exist, create the database in the proper schema
 - [x] When adding a new task, if nothing entered for due date, set it to today
-- [ ] Implement a way to complete multiple tasks at once
+- [x] Implement a way to complete multiple tasks at once
 - [ ] Integrate a pomodoro timer
 - [ ] Add a way to modify tasks (due_date, priority, etc)
 - [ ] Add a way to add tags to tasks
