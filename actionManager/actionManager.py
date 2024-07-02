@@ -67,7 +67,7 @@ def complete(idx):
     db = connect()
     execute(db, f"""UPDATE tasks 
                 SET completed = 1, completed_date = '{completed_date}' 
-                WHERE id = {idx};""")
+                WHERE id in ({", ".join(str(i) for i in idx)});""")
     commit(db)
     close(db)
     syncToFile()

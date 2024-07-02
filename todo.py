@@ -6,7 +6,7 @@ from actionManager import actionManager
 try:
     parser = argparse.ArgumentParser(description = "Manages tasks in todo.md")
     parser.add_argument("-a", "--add", metavar='TASK', help="Add task")
-    parser.add_argument("-c", "--complete", type=int, metavar="LINE_NUMBER", help="Complete task at linenumber IDX")
+    parser.add_argument("-c", "--complete", nargs=argparse.REMAINDER, type=int, metavar="LINE_NUMBER", help="Complete task at linenumber IDX")
     parser.add_argument("-l", "--list", action='store_true', help="List tasks")
     parser.add_argument("-r", "--remove", type=int, metavar="LINE_NUMBER", help="Remove line at linenumber IDX")
     parser.add_argument("-t", "--tag", nargs=3, metavar="", help="<LINE> <KEY> <VALUE> Adds a tag with a value to a given line number")
