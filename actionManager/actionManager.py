@@ -56,9 +56,6 @@ def list():
     rows = res.fetchall()
     close(db)
     for row in rows:
-        # print(f" | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}")
-        # Started working on this 2024-07-01
-        # For any due dates < today, print in red
         if row[2] < datetime.strftime(datetime.now(), "%Y-%m-%d"):
             print(f"{bcolors.WARNING} | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}{bcolors.ENDC}")
         else:
