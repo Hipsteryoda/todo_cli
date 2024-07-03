@@ -4,6 +4,9 @@ from actionManager.config import source_config
 from datetime import datetime
 from actionManager.bcolors import bcolors
 
+from pomodoro.timer import timer
+
+
 # TODO: create a dedicated function to read the config file
 try:
     conf = source_config()
@@ -72,6 +75,20 @@ def complete(idx):
     close(db)
     syncToFile()
     list()
+
+def start_task(idx):
+    # start a pomodoro timer
+    db = connect()
+    cursor = db.cursor()
+    res = cursor.execute(f"""SELECT task
+                FROM tasks
+                WHERE id = {idx};""")
+    task = res.fetchall()[0][0]
+    close(db)
+    result = timer(task)
+    if result == 1:
+    # TODO: increment the number of pomodoros for the task
+        pass
 
 def syncFromFile():
     # TODO: read file and update db with completed tasks signified by "- [x]"
