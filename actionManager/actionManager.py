@@ -82,6 +82,14 @@ def complete(idx):
     syncToFile()
     list()
 
+def remove(idx):
+    db = connect()
+    execute(db, f"""DELETE FROM tasks WHERE id in ({", ".join(str(i) for i in idx)});""")
+    commit(db)
+    close(db)
+    syncToFile()
+    list()
+
 def start_task(idx):
     # start a pomodoro timer
     db = connect()

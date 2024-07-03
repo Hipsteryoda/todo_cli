@@ -9,7 +9,7 @@ try:
     parser.add_argument("-c", "--complete", nargs=argparse.REMAINDER, type=int, metavar="LINE_NUMBER", help="Complete task at linenumber IDX")
     parser.add_argument("-l", "--list", action='store_true', help="List tasks")
     parser.add_argument("-m", "--modify", type=int, metavar="LINE_NUMBER", help="Modify task at linenumber IDX")
-    parser.add_argument("-r", "--remove", type=int, metavar="LINE_NUMBER", help="Remove line at linenumber IDX")
+    parser.add_argument("-r", "--remove", nargs=argparse.REMAINDER, type=int, metavar="LINE_NUMBER", help="Remove line at linenumber IDX")
     parser.add_argument("-s", "--start", help="Start work on a task")
     parser.add_argument("-t", "--tag", nargs=3, metavar="", help="<LINE> <KEY> <VALUE> Adds a tag with a value to a given line number")
     args = parser.parse_args()
