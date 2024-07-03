@@ -6,8 +6,6 @@ from actionManager.bcolors import bcolors
 
 from pomodoro.timer import timer
 
-
-# TODO: create a dedicated function to read the config file
 try:
     conf = source_config()
     TODO_FILE_PATH = os.environ["HOME"] + conf['config']['todo_file_path']
