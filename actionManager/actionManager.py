@@ -59,6 +59,17 @@ def list():
         else:
             print(f" | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}")
 
+def modify(idx):
+    due_date, priority = collect_task_details()
+    db = connect()
+    execute(db, f"""UPDATE tasks 
+                SET due_date = '{due_date}', priority = '{priority}' 
+                WHERE id in ({idx});""")
+    commit(db)
+    close(db)
+    syncToFile()
+    list()
+
 def complete(idx):
     # find the task in the database and set completed to 1
     completed_date = datetime.strftime(datetime.now(), "%Y-%m-%dT%H:%M:%S.%f")
