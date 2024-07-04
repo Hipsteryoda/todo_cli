@@ -54,7 +54,9 @@ def list():
     rows = res.fetchall()
     close(db)
     for row in rows:
-        if row[2] < datetime.strftime(datetime.now(), "%Y-%m-%d"):
+        if row[2] == datetime.strftime(datetime.now(), "%Y-%m-%d"):
+            print(f"{bcolors.OKGREEN} | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}{bcolors.ENDC}")
+        elif row[2] < datetime.strftime(datetime.now(), "%Y-%m-%d"):
             print(f"{bcolors.WARNING} | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}{bcolors.ENDC}")
         else:
             print(f" | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}")

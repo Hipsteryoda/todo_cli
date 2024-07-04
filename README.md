@@ -8,7 +8,8 @@ cli interface for managing tasks in central Obsidian file
 - [x] Implement a way to complete multiple tasks at once
 - [x] Integrate a pomodoro timer
 - [ ] Improve pomodoro timer functionality
-- [ ] Add a way to modify tasks (due_date, priority, etc)
+- [x] Add a way to modify tasks (due_date, priority, etc)
+- [x] Add a way to remove tasks
 - [ ] Add a way to add tags to tasks
 - [ ] Clean up the quereies in actionManager; find a more organized way of doing this
 
@@ -35,5 +36,6 @@ Pomodoro timer:
 2. `-c` option completes a task
     - Allows for multiple tasks to be completed at once
 3. `-l` lists all uncompleted tasks
+4. `-r` removes a task
 
     
