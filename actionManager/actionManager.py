@@ -4,7 +4,7 @@ from actionManager.config import source_config
 from datetime import datetime
 from actionManager.bcolors import bcolors
 
-from pomodoro.timer import timer
+from pomodoro.timer import Timer
 
 try:
     conf = source_config()
@@ -101,7 +101,8 @@ def start_task(idx):
                 WHERE id = {idx};""")
     task = res.fetchall()[0][0]
     close(db)
-    result = timer(task)
+    timer = Timer(task)
+    result = timer.start()
     if result == 1:
     # TODO: increment the number of pomodoros for the task
         pass
