@@ -1,6 +1,6 @@
 import time
 from actionManager.bcolors import bcolors
-from art import *
+import art
 
 # TODO: Make a Timer class that allows you to start and stop the timer, etc.
 class Timer:
@@ -29,8 +29,8 @@ class Timer:
             opt = input()
             if opt == '1':
                 self.pause()
-            # elif opt == '2':
-            #     self.stop()
+            elif opt == '2':
+                self.stop()
 
     def stop(self):
         # reset the timer
@@ -48,15 +48,14 @@ class Timer:
             self.start()
 
     def print_time_to_screen(self):
-        # clear screen
-        print("\033[2J\033[1;1H")
+        print("\033[2J\033[1;1H")           # ascii code for clear screen
         print(f"{bcolors.UNDERLINE}{self.current_task}{bcolors.ENDC}")
         if self.minutes_remaining >= 5:
             print(f"{bcolors.OKGREEN}")
-            tprint(f"{self.minutes_remaining}:{self.seconds_remaining:02}", font="doh")
+            art.tprint(f"{self.minutes_remaining}:{self.seconds_remaining:02}", font="doh")
             print(f"{bcolors.ENDC}")
         else:
             print(f"{bcolors.RED}")
-            tprint(f"{self.minutes_remaining}:{self.seconds_remaining:02}", font="doh")
+            art.tprint(f"{self.minutes_remaining}:{self.seconds_remaining:02}", font="doh")
             print(f"{bcolors.ENDC}")
 
