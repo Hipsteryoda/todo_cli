@@ -109,6 +109,14 @@ def remove(idx):
     syncToFile()
     list()
 
+def tag(idx, tag):
+    db = connect()
+    execute(db, f"""INSERT INTO tags (task_id, tag) 
+                VALUES ({idx}, '{tag}');""")
+    commit(db)
+    close(db)
+    list_with_tag(tag)
+
 def start_task(idx):
     # start a pomodoro timer
     db = connect()
