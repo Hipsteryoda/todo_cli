@@ -18,8 +18,8 @@ try:
     if args.add:
         due_date, priority = actionManager.collect_task_details()
         actionManager.add(args.add, due_date=due_date, priority=priority)
-    elif args.tag:
-        actionManager.tag(int(args.tag[0]), args.tag[1])
+    elif args.complete:
+        actionManager.complete(args.complete)
     elif args.list:
         actionManager.list()
     elif args.list_with_tag:
@@ -28,8 +28,8 @@ try:
         actionManager.modify(args.modify)
     elif args.remove:
         actionManager.remove(args.remove)
-    elif args.complete:
-        actionManager.complete(args.complete)
+    elif args.tag:
+        actionManager.tag(int(args.tag[0]), args.tag[1])
     elif args.start:
         actionManager.start_task(args.start)
 except Exception as e:

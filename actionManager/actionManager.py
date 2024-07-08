@@ -28,7 +28,7 @@ def add(task, due_date=None, priority=None):
                     , '{priority}');""")
     commit(db)
     close(db)
-    syncToFile()
+    # syncToFile()
     list()
 
 def collect_task_details():
@@ -39,6 +39,19 @@ def collect_task_details():
     if priority == '':
         priority = '1'
     return due_date, priority
+
+def print_rows(rows):
+     #TODO: format headers and row values to be properly aligned
+    headers = ["ID", "PRIORITY", "DUE DATE", "TASK"]
+    # spacing = [10, 10, 15, 30]
+    print(f"{bcolors.UNDERLINE}" + " | {: <6} | {: <15} | {: <15} | {: <30}".format(*headers) + bcolors.ENDC)
+    for row in rows:
+        if row[2] == datetime.strftime(datetime.now(), "%Y-%m-%d"):
+            print(f"{bcolors.OKGREEN} | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}{bcolors.ENDC}")
+        elif row[2] < datetime.strftime(datetime.now(), "%Y-%m-%d"):
+            print(f"{bcolors.WARNING} | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}{bcolors.ENDC}")
+        else:
+            print(f" | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}")
 
 def list():
     db = connect()
@@ -65,19 +78,6 @@ def list_with_tag(tag):
     close(db)
     print_rows(rows)
 
-def print_rows(rows):
-     #TODO: format headers and row values to be properly aligned
-    headers = ["ID", "PRIORITY", "DUE DATE", "TASK"]
-    # spacing = [10, 10, 15, 30]
-    print(f"{bcolors.UNDERLINE}" + " | {: <6} | {: <15} | {: <15} | {: <30}".format(*headers) + bcolors.ENDC)
-    for row in rows:
-        if row[2] == datetime.strftime(datetime.now(), "%Y-%m-%d"):
-            print(f"{bcolors.OKGREEN} | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}{bcolors.ENDC}")
-        elif row[2] < datetime.strftime(datetime.now(), "%Y-%m-%d"):
-            print(f"{bcolors.WARNING} | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}{bcolors.ENDC}")
-        else:
-            print(f" | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}")
-
 def modify(idx):
     due_date, priority = collect_task_details()
     db = connect()
@@ -86,7 +86,7 @@ def modify(idx):
                 WHERE id in ({idx});""")
     commit(db)
     close(db)
-    syncToFile()
+    # syncToFile()
     list()
 
 def complete(idx):
@@ -98,7 +98,7 @@ def complete(idx):
                 WHERE id in ({", ".join(str(i) for i in idx)});""")
     commit(db)
     close(db)
-    syncToFile()
+    # syncToFile()
     list()
 
 def remove(idx):
@@ -106,7 +106,7 @@ def remove(idx):
     execute(db, f"""DELETE FROM tasks WHERE id in ({", ".join(str(i) for i in idx)});""")
     commit(db)
     close(db)
-    syncToFile()
+    # syncToFile()
     list()
 
 def tag(idx, tag):
@@ -147,7 +147,7 @@ def syncFromFile():
                 commit(db)
                 close(db)
 
-
+# TODO; fix all references to this; something breaks any function this is called from
 def syncToFile():
     syncFromFile()
     db = connect()

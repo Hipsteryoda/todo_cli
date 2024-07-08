@@ -1,5 +1,5 @@
 # todo_cli
-cli interface for managing tasks in central Obsidian file
+CLI to-do manager that allows for tagging, prioritization, pomodoro timers, and more. 
 
 # TODO
 - [x] Move config to a yaml file in .config/todo-cli
