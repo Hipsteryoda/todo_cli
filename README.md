@@ -10,7 +10,9 @@ cli interface for managing tasks in central Obsidian file
 - [x] Improve pomodoro timer functionality
 - [x] Add a way to modify tasks (due_date, priority, etc)
 - [x] Add a way to remove tasks
-- [ ] Add a way to add tags to tasks
+- [x] Add a way to add tags to tasks
+- [ ] Add a way to remove tags from tasks
+- [ ] Add a way to list all distinct tasks
 - [ ] Clean up the quereies in actionManager; find a more organized way of doing this
 
 # Configuration
