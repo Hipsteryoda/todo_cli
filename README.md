@@ -7,7 +7,7 @@ cli interface for managing tasks in central Obsidian file
 - [x] When adding a new task, if nothing entered for due date, set it to today
 - [x] Implement a way to complete multiple tasks at once
 - [x] Integrate a pomodoro timer
-- [ ] Improve pomodoro timer functionality
+- [x] Improve pomodoro timer functionality
 - [x] Add a way to modify tasks (due_date, priority, etc)
 - [x] Add a way to remove tasks
 - [ ] Add a way to add tags to tasks

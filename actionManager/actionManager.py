@@ -41,10 +41,6 @@ def collect_task_details():
     return due_date, priority
 
 def list():
-    #TODO: format headers and row values to be properly aligned
-    headers = ["ID", "PRIORITY", "DUE DATE", "TASK"]
-    # spacing = [10, 10, 15, 30]
-    print(f"{bcolors.UNDERLINE}" + " | {: <6} | {: <15} | {: <15} | {: <30}".format(*headers) + bcolors.ENDC)
     db = connect()
     cursor = db.cursor()
     res = cursor.execute("""SELECT id, priority, due_date, task 
@@ -53,6 +49,27 @@ def list():
                         ORDER BY priority, due_date ASC;""")
     rows = res.fetchall()
     close(db)
+    print_rows(rows)
+
+def list_with_tag(tag):
+    db = connect()
+    cursor = db.cursor()
+    res = cursor.execute(f"""SELECT k.id, k.priority, k.due_date, k.task 
+                    FROM tasks AS k
+                    left join tags as g
+                    on k.id = g.task_id
+                    WHERE completed = 0
+                    AND tag = '{tag}'
+                    ORDER BY priority, due_date ASC;""")
+    rows = res.fetchall()
+    close(db)
+    print_rows(rows)
+
+def print_rows(rows):
+     #TODO: format headers and row values to be properly aligned
+    headers = ["ID", "PRIORITY", "DUE DATE", "TASK"]
+    # spacing = [10, 10, 15, 30]
+    print(f"{bcolors.UNDERLINE}" + " | {: <6} | {: <15} | {: <15} | {: <30}".format(*headers) + bcolors.ENDC)
     for row in rows:
         if row[2] == datetime.strftime(datetime.now(), "%Y-%m-%d"):
             print(f"{bcolors.OKGREEN} | {row[0] : <6} | {row[1] : <15} | {row[2] : <15} | {row[3]}{bcolors.ENDC}")
