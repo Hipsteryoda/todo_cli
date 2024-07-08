@@ -103,7 +103,8 @@ def complete(idx):
 
 def remove(idx):
     db = connect()
-    execute(db, f"""DELETE FROM tasks WHERE id in ({", ".join(str(i) for i in idx)});""")
+    execute(db, f"""DELETE FROM tasks 
+                    WHERE id in ({", ".join(str(i) for i in idx)});""")
     commit(db)
     close(db)
     # syncToFile()
@@ -139,9 +140,13 @@ def syncFromFile():
             if "- [x]" in line:
                 idx = line[5:].split("|")[0].strip()
                 # complete(idx) <-- results in a RecursionError
-                completed_date = datetime.strftime(datetime.now(), "%Y-%m-%dT%H:%M:%S.%f")
+                completed_date = datetime.strftime(
+                    datetime.now(), 
+                    "%Y-%m-%dT%H:%M:%S.%f"
+                )
                 db = connect()
-                execute(db, f"""UPDATE tasks 
+                execute(db, 
+                        f"""UPDATE tasks 
                             SET completed = 1, completed_date = '{completed_date}' 
                             WHERE id = {idx};""")
                 commit(db)
@@ -159,5 +164,6 @@ def syncToFile():
     close(db)
     with open(TODO_FILE_PATH, 'w') as f:
         for row in rows:
-            f.write(f"- [ ] {row[0]} | {row[1]} [due:: {row[2]}] [priority:: {row[3]}]\n")
+            f.write(f"- [ ] {row[0]} | {row[1]} \
+            [due:: {row[2]}] [priority:: {row[3]}]\n")
 

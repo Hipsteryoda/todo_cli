@@ -20,6 +20,7 @@ def init():
 
 def connect():
     # FIXME: this is not a good way to do this
+    # avoid init every time a connection is made
     init()
     return sqlite3.connect(DB_FILE_PATH)
 
