@@ -81,6 +81,9 @@ def list_with_tag(tag):
 def modify(idx):
     due_date, priority = collect_task_details()
     db = connect()
+    print(f"""UPDATE tasks 
+                SET due_date = '{due_date}', priority = '{priority}' 
+                WHERE id in ({idx});""")
     execute(db, f"""UPDATE tasks 
                 SET due_date = '{due_date}', priority = '{priority}' 
                 WHERE id in ({idx});""")

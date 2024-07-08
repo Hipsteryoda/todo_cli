@@ -22,7 +22,7 @@ try:
         actionManager.complete(args.complete)
     elif args.list:
         actionManager.list()
-    elif args.list_with_tag:
+    elif args.list_with_tag != "-":
         actionManager.list_with_tag(args.list_with_tag)
     elif args.modify:
         actionManager.modify(args.modify)
