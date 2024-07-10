@@ -59,7 +59,7 @@ def list():
     res = cursor.execute("""SELECT id, priority, due_date, task 
                         FROM tasks
                         WHERE completed = 0
-                        ORDER BY priority, due_date ASC;""")
+                        ORDER BY due_date, priority ASC;""")
     rows = res.fetchall()
     close(db)
     print_rows(rows)
@@ -73,7 +73,7 @@ def list_with_tag(tag):
                     on k.id = g.task_id
                     WHERE completed = 0
                     AND tag = '{tag}'
-                    ORDER BY priority, due_date ASC;""")
+                    ORDER BY due_date, priority ASC;""")
     rows = res.fetchall()
     close(db)
     print_rows(rows)
