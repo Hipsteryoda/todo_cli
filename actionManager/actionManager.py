@@ -133,6 +133,14 @@ def start_task(idx):
     # TODO: increment the number of pomodoros for the task
         pass
 
+def remove_tag(idx, tag):
+    db = connect()
+    execute(db, f"""DELETE FROM tags 
+                    WHERE task_id = {idx} AND tag = '{tag}';""")
+    commit(db)
+    close(db)
+    list_with_tag(tag)
+
 def syncFromFile():
     # TODO: read file and update db with completed tasks signified by "- [x]"
     with open(TODO_FILE_PATH, 'r') as f:

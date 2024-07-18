@@ -9,6 +9,7 @@ try:
     parser.add_argument("-c", "--complete", nargs=argparse.REMAINDER, type=int, metavar="LINE_NUMBER", help="Complete task at linenumber IDX")
     parser.add_argument("-l", "--list", action='store_true', help="List tasks")
     parser.add_argument("-lt", "--list_with_tag", nargs="?", default="-", help="List tasks")
+    parser.add_argument("-rt", "--remove_tag", nargs=argparse.REMAINDER, metavar="TAG", help="Remove tag")
     parser.add_argument("-m", "--modify", type=int, metavar="LINE_NUMBER", help="Modify task at linenumber IDX")
     parser.add_argument("-r", "--remove", nargs=argparse.REMAINDER, type=int, metavar="LINE_NUMBER", help="Remove line at linenumber IDX")
     parser.add_argument("-s", "--start", help="Start work on a task")
@@ -24,6 +25,8 @@ try:
         actionManager.list()
     elif args.list_with_tag != "-":
         actionManager.list_with_tag(args.list_with_tag)
+    elif args.remove_tag:
+        actionManager.remove_tag(int(args.remove_tag[0]), args.remove_tag[1])
     elif args.modify:
         actionManager.modify(args.modify)
     elif args.remove:
