@@ -1,10 +1,13 @@
-import os
+import os, yaml
 from actionManager.db import connect, execute, commit, close
 from actionManager.config import source_config
 from datetime import datetime
 from actionManager.bcolors import bcolors
 
 from pomodoro.timer import Timer
+
+QUERIES_PATH = os.getcwd() + '/actionManager/queries.yaml' 
+queries = yaml.safe_load(open(QUERIES_PATH))
 
 try:
     conf = source_config()
@@ -56,10 +59,7 @@ def print_rows(rows):
 def list():
     db = connect()
     cursor = db.cursor()
-    res = cursor.execute("""SELECT id, priority, due_date, task 
-                        FROM tasks
-                        WHERE completed = 0
-                        ORDER BY due_date, priority ASC;""")
+    res = cursor.execute(queries['queries']['list'])
     rows = res.fetchall()
     close(db)
     print_rows(rows)

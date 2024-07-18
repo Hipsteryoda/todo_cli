@@ -1,0 +1,5 @@
+queries:
+  list: "SELECT id, priority, due_date, task 
+                        FROM tasks
+                        WHERE completed = 0
+                        ORDER BY due_date, priority ASC;"
