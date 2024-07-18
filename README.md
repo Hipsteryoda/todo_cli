@@ -11,7 +11,7 @@ CLI to-do manager that allows for tagging, prioritization, pomodoro timers, and 
 - [x] Add a way to modify tasks (due_date, priority, etc)
 - [x] Add a way to remove tasks
 - [x] Add a way to add tags to tasks
-- [ ] Add a way to remove tags from tasks
+- [x] Add a way to remove tags from tasks
 - [ ] Add a way to list all distinct tags
 - [ ] Clean up the quereies in actionManager; find a more organized way of doing this
 - [ ] Add a way to make tasks recurring (day, week, month, etc.)
