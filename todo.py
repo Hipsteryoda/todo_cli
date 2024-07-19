@@ -17,8 +17,7 @@ try:
     args = parser.parse_args()
 
     if args.add:
-        due_date, priority = actionManager.collect_task_details()
-        actionManager.add(args.add, due_date=due_date, priority=priority)
+        actionManager.add(args.add)
     elif args.complete:
         actionManager.complete(args.complete)
     elif args.list:
@@ -26,13 +25,13 @@ try:
     elif args.list_with_tag != "-":
         actionManager.list_with_tag(args.list_with_tag)
     elif args.remove_tag:
-        actionManager.remove_tag(int(args.remove_tag[0]), args.remove_tag[1])
+        actionManager.remove_tag(args.remove_tag[0], args.remove_tag[1])
     elif args.modify:
         actionManager.modify(args.modify)
     elif args.remove:
         actionManager.remove(args.remove)
     elif args.tag:
-        actionManager.tag(int(args.tag[0]), args.tag[1])
+        actionManager.tag(args.tag[0], args.tag[1])
     elif args.start:
         actionManager.start_task(args.start)
 except Exception as e:
