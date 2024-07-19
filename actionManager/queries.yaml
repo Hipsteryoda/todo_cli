@@ -22,9 +22,9 @@ queries:
                     ORDER BY due_date, priority ASC;"
   complete: "UPDATE tasks 
               SET completed = 1 
-              WHERE id in (?);"
-  remove: "DELETE FROM tasks WHERE id in (?);"
-  tag: "INSERT INTO tags (task_id, tag) VALUES (?, '!');"
+              WHERE id in ({idx});"
+  remove: "DELETE FROM tasks WHERE id in ({idx});"
+  tag: "INSERT INTO tags (task_id, tag) VALUES ({idx}, '{tag}');"
   remove_tag: "DELETE FROM tags WHERE task_id = {idx} AND tag = '{tag}';"
   modify: "UPDATE tasks 
             SET due_date = '{due_date}', priority = '{priority}' 

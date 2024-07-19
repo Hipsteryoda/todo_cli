@@ -87,7 +87,7 @@ def complete(idx):
     completed_date = datetime.strftime(datetime.now(), "%Y-%m-%dT%H:%M:%S.%f")
     db = connect()
     cursor = db.cursor()
-    cursor.execute(queries['queries']['complete'].replace("?", ", ".join(str(i) for i in idx)))
+    cursor.execute(queries['queries']['complete'].replace("{idx}", ", ".join(str(i) for i in idx)))
     commit(db)
     close(db)
     # syncToFile()
@@ -96,7 +96,7 @@ def complete(idx):
 def remove(idx):
     db = connect()
     cursor = db.cursor()
-    cursor.execute(queries['queries']['remove'].replace("?", ", ".join(str(i) for i in idx)))
+    cursor.execute(queries['queries']['remove'].replace("{idx}", ", ".join(str(i) for i in idx)))
     commit(db)
     close(db)
     # syncToFile()
@@ -105,7 +105,9 @@ def remove(idx):
 def tag(idx, tag):
     db = connect()
     cursor = db.cursor()
-    cursor.execute(queries['queries']['tag'].replace("?", idx).replace("!", tag))
+    cursor.execute(queries['queries']['tag']
+                   .replace("{idx}", idx)
+                   .replace("{tag}", tag))
     commit(db)
     close(db)
     list_with_tag(tag)
