@@ -6,12 +6,11 @@ from actionManager.bcolors import bcolors
 
 from pomodoro.timer import Timer
 
-QUERIES_PATH = os.getcwd() + '/actionManager/queries.yaml' 
-queries = yaml.safe_load(open(QUERIES_PATH))
-
 try:
     conf = source_config()
     TODO_FILE_PATH = os.environ["HOME"] + conf['config']['todo_file_path']
+    QUERIES_PATH = os.environ["HOME"] + conf['config']['queries_path']
+    queries = yaml.safe_load(open(QUERIES_PATH))
 except Exception as e:
     print(e)
 
