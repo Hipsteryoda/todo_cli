@@ -68,6 +68,15 @@ def list_with_tag(tag):
     close(db)
     print_rows(rows)
 
+def list_all_tags():
+    db = connect()
+    cursor = db.cursor()
+    res = cursor.execute(queries['queries']['list_all_tags'])
+    rows = res.fetchall()
+    for row in rows:
+        print(row[0])
+    close(db)
+
 def modify(idx):
     due_date, priority = collect_task_details()
     db = connect()

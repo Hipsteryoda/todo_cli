@@ -20,6 +20,9 @@ queries:
                     WHERE completed = 0
                     AND tag = '{tag}'
                     ORDER BY due_date, priority ASC;"
+  list_all_tags: "SELECT distinct(tag) FROM tags
+              left join tasks on tasks.id = tags.task_id 
+              WHERE tasks.completed = 0;"
   complete: "UPDATE tasks 
               SET completed = 1 
               WHERE id in ({idx});"
