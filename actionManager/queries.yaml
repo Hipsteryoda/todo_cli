@@ -3,7 +3,9 @@ queries:
                     , completed
                     , created_date
                     , due_date
-                    , priority) 
+                    , priority
+                    , recurring
+                    , frequency) 
                 VALUES ('{task}'
                     , 0
                     , '{now}'
