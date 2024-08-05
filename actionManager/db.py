@@ -14,6 +14,8 @@ def init():
                 , due_date TEXT
                 , priority TEXT
                 , completed_date TEXT
+                , recurring TEXT
+                , frequency TEXT
                 );""")
     commit(db)
     close(db)

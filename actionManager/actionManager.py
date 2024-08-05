@@ -15,11 +15,12 @@ except Exception as e:
     print(e)
 
 def add(task):
-    # use sqlite3 to insert into db
-    due_date, priority = collect_task_details()
+    # use sqlite3 to insert into db
+    due_date, priority, recurring, frequency = collect_task_details()
     now = datetime.strftime(datetime.now(), "%Y-%m-%dT%H:%M:%S.%f") 
     db = connect()
     cursor = db.cursor()
+    # TODO: add recurring and frequency to queries
     cursor.execute(queries['queries']['add']
                    .replace('{task}', task)
                    .replace('{now}', now)
@@ -31,13 +32,27 @@ def add(task):
     list()
 
 def collect_task_details():
+    # Get due date
     due_date = input('Due date (YYYY-MM-DD): ')
     if due_date == '':
         due_date = datetime.today().strftime("%Y-%m-%d")
-    priority = input('Priority: ')
-    if priority == '':
+    # Get priority 
+    priority = input('Priority: ') 
+    if priority == '': 
         priority = '1'
-    return due_date, priority
+    # Get recurring
+    recurring = input('Recurring (y/n): ')
+    if recurring[0].lower() == 'y':
+        recurring = '1'
+        frequency = input('Frequency (daily/weekly/monthly): ')
+        if frequency == '':
+            frequency = 'none'
+        else:
+            frequency = frequency[0].lower()
+    else: 
+        recurring = '0'
+        frequency = 'none'
+    return due_date, priority, recurring, frequency
 
 def print_rows(rows):
      #TODO: format headers and row values to be properly aligned
@@ -78,13 +93,15 @@ def list_all_tags():
     close(db)
 
 def modify(idx):
-    due_date, priority = collect_task_details()
+    due_date, priority, recurring, frequency = collect_task_details()
     db = connect()
     cursor = db.cursor()
     cursor.execute(queries['queries']['modify']
                    .replace("{idx}", str(idx))
                    .replace("{due_date}", due_date)
-                   .replace("{priority}", priority))
+                   .replace("{priority}", priority)
+                   .replace("{recurring}", recurring)
+                   .replace("{frequency}", frequency))
     commit(db)
     close(db)
     # syncToFile()

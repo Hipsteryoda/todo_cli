@@ -8,7 +8,9 @@ queries:
                     , 0
                     , '{now}'
                     , '{due_date}'
-                    , '{priority}');"
+                    , '{priority}'
+                    , '{recurring}'
+                    , '{frequency}');"
   list: "SELECT id, priority, due_date, task 
                         FROM tasks
                         WHERE completed = 0
