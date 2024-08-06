@@ -13,6 +13,7 @@ queries:
                     , '{priority}'
                     , '{recurring}'
                     , '{frequency}');"
+  check_recurring: "SELECT task, due_date, priority, recurring, frequency FROM tasks WHERE id in ({idx});"
   list: "SELECT id, priority, due_date, task 
                         FROM tasks
                         WHERE completed = 0

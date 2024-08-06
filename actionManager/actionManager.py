@@ -1,7 +1,7 @@
 import os, yaml
 from actionManager.db import connect, execute, commit, close
 from actionManager.config import source_config
-from datetime import datetime
+from datetime import datetime, timedelta
 from actionManager.bcolors import bcolors
 
 from pomodoro.timer import Timer
@@ -14,9 +14,10 @@ try:
 except Exception as e:
     print(e)
 
-def add(task):
+def add(task, due_date=None, priority=None, recurring=None, frequency=None, list=True):
     # use sqlite3 to insert into db
-    due_date, priority, recurring, frequency = collect_task_details()
+    if due_date == None:
+        due_date, priority, recurring, frequency = collect_task_details()
     now = datetime.strftime(datetime.now(), "%Y-%m-%dT%H:%M:%S.%f") 
     db = connect()
     cursor = db.cursor()
@@ -25,11 +26,14 @@ def add(task):
                    .replace('{task}', task)
                    .replace('{now}', now)
                    .replace('{due_date}', due_date)
-                   .replace('{priority}', priority))
+                   .replace('{priority}', priority)
+                   .replace('{recurring}', recurring)
+                   .replace('{frequency}', frequency))
     commit(db)
     close(db)
     # syncToFile()
-    list()
+    if list:
+        list()
 
 def collect_task_details():
     # Get due date
@@ -107,9 +111,34 @@ def modify(idx):
     # syncToFile()
     list()
 
+def check_recurring(idx):
+    db = connect()
+    cursor = db.cursor()
+    res = cursor.execute(queries['queries']['check_recurring'].replace("{idx}", ", ".join(str(i) for i in idx)))
+    rows = res.fetchall()
+    close(db)
+    return rows
+
+def get_next_recurring_due_date(frequency):
+    if frequency == 'd':
+        return datetime.strftime(datetime.now() + timedelta(days=1), "%Y-%m-%d")
+    elif frequency == 'w':
+        return datetime.strftime(datetime.now() + timedelta(weeks=1), "%Y-%m-%d")
+    elif frequency == 'm':
+        return datetime.strftime(datetime.now() + timedelta(weeks=4), "%Y-%m-%d")
+
 def complete(idx):
     # find the task in the database and set completed to 1
     completed_date = datetime.strftime(datetime.now(), "%Y-%m-%dT%H:%M:%S.%f")
+    recurrance = check_recurring(idx)
+    task = recurrance[0][0]
+    priority = recurrance[0][2]
+    recurring = recurrance[0][3]
+    frequency = recurrance[0][4]
+    if recurring != None:
+        due_date = get_next_recurring_due_date(frequency)
+        add(task, due_date, priority, recurring, frequency, False)
+
     db = connect()
     cursor = db.cursor()
     cursor.execute(queries['queries']['complete'].replace("{idx}", ", ".join(str(i) for i in idx)))
