@@ -14,7 +14,7 @@ CLI to-do manager that allows for tagging, prioritization, pomodoro timers, and 
 - [x] Add a way to remove tags from tasks
 - [x] Add a way to list all distinct tags
 - [x] Clean up the quereies in actionManager; find a more organized way of doing this
-- [ ] Add a way to make tasks recurring (day, week, month, etc.)
+- [x] Add a way to make tasks recurring (day, week, month, etc.)
 
 # Configuration
 Add a file `config.yaml` in `$HOME/.config/todo-cli` with the following contents:

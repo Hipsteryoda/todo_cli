@@ -2,3 +2,4 @@ __pycache__/
 actionManager/todo.db
 actionManager/todo.sql
 test.py
+notes.md
