@@ -17,14 +17,13 @@ CLI to-do manager that allows for tagging, prioritization, pomodoro timers, and 
 - [x] Add a way to make tasks recurring (day, week, month, etc.)
 
 # Configuration
-Add a file `config.yaml` in `$HOME/.config/todo-cli` with the following contents:
+Add a file `config.yaml` in `.config/todo-cli` with the following contents:
 ```
 config:
     # specify relative path to todo file from $HOME; do not include ~ in path
     todo_file_path: PATH_TO_MARKDOWN_FILE
     db_file_path: PATH_TO_SQLITE_FILE
-    quereies_file_path: PATH_TO/actionManager/queries.yaml
- ```
+```
 
 # Features
 
