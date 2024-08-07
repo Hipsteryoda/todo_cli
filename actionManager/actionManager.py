@@ -14,7 +14,7 @@ try:
 except Exception as e:
     print(e)
 
-def add(task, due_date=None, priority=None, recurring=None, frequency=None, list=True):
+def add(task, due_date=None, priority=None, recurring=None, frequency=None, lst=True):
     # use sqlite3 to insert into db
     if due_date == None:
         due_date, priority, recurring, frequency = collect_task_details()
@@ -32,7 +32,7 @@ def add(task, due_date=None, priority=None, recurring=None, frequency=None, list
     commit(db)
     close(db)
     # syncToFile()
-    if list:
+    if lst:
         list()
 
 def collect_task_details():
