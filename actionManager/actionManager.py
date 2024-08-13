@@ -166,13 +166,16 @@ def tag(idx, tag):
     close(db)
     list_with_tag(tag)
 
-def start_task(idx):
-    # start a pomodoro timer
-    db = connect()
-    cursor = db.cursor()
-    res = cursor.execute(queries['queries']['start_task'].replace("{idx}", idx))
-    task = res.fetchall()[0][0]
-    close(db)
+def start_task(idx, adhoc=False):
+    if not adhoc: 
+        # start a pomodoro timer
+        db = connect()
+        cursor = db.cursor()
+        res = cursor.execute(queries['queries']['start_task'].replace("{idx}", idx))
+        task = res.fetchall()[0][0]
+        close(db)
+    else: 
+        task = idx
     timer = Timer(task)
     result = timer.start()
     if result == 1:

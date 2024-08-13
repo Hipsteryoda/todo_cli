@@ -1,22 +1,14 @@
-import sqlite3, os
+import sqlite3, os, yaml
 from actionManager.config import source_config
 
 conf = source_config()
 DB_FILE_PATH = os.environ["HOME"] + conf['config']['db_file_path']
+QUERIES_PATH = os.environ["HOME"] + conf['config']['queries_path']
+queries = yaml.safe_load(open(QUERIES_PATH))
 
 def init():
     db = sqlite3.connect(DB_FILE_PATH)
-    execute(db, """CREATE TABLE IF NOT EXISTS tasks
-                (id INTEGER PRIMARY KEY AUTOINCREMENT
-                , task TEXT
-                , completed INTEGER
-                , created_date TEXT
-                , due_date TEXT
-                , priority TEXT
-                , completed_date TEXT
-                , recurring TEXT
-                , frequency TEXT
-                );""")
+    execute(db, queries['queries']['initialize_table'])  
     commit(db)
     close(db)
 

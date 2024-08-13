@@ -14,6 +14,7 @@ try:
     parser.add_argument("-m", "--modify", type=int, metavar="LINE_NUMBER", help="Modify task at linenumber IDX")
     parser.add_argument("-r", "--remove", nargs=argparse.REMAINDER, type=int, metavar="LINE_NUMBER", help="Remove line at linenumber IDX")
     parser.add_argument("-s", "--start", help="Start work on a task")
+    parser.add_argument("-sah", "--start-adhoc", help="Start work on an adhoc task")
     parser.add_argument("-t", "--tag", nargs=argparse.REMAINDER, help="<IDX> <TAG> Adds a tag with a value to a given line number")
     args = parser.parse_args()
 
@@ -37,5 +38,7 @@ try:
         actionManager.tag(args.tag[0], args.tag[1])
     elif args.start:
         actionManager.start_task(args.start)
+    elif args.start_adhoc:
+        actionManager.start_task(args.start, adhoc=True)
 except Exception as e:
     print(e)
