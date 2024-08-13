@@ -135,7 +135,7 @@ def complete(idx):
     priority = recurrance[0][2]
     recurring = recurrance[0][3]
     frequency = recurrance[0][4]
-    if recurring != None:
+    if recurring != '0':
         due_date = get_next_recurring_due_date(frequency)
         add(task, due_date, priority, recurring, frequency, False)
 
