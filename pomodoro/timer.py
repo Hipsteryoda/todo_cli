@@ -1,4 +1,4 @@
-import time
+import time, os
 from actionManager.bcolors import bcolors
 import art
 
@@ -20,8 +20,7 @@ class Timer:
                     self.seconds_remaining = self.timer_seconds - j
                     self.print_time_to_screen()
                     time.sleep(1)
-            print("Time's up!")
-            return 1
+            os.system("notify-send 'Time is up!'")
         except KeyboardInterrupt:
             print("")
             print("1) Pause the timer")
@@ -59,3 +58,8 @@ class Timer:
             art.tprint(f"{self.minutes_remaining}:{self.seconds_remaining:02}", font="doh")
             print(f"{bcolors.ENDC}")
 
+
+if __name__ == "__main__":
+    timer = Timer("Test Task", minutes=1)
+    timer.start()
+    timer.print_time_to_screen()
